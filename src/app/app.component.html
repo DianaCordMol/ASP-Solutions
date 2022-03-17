@@ -1,0 +1,93 @@
+<nz-layout>
+
+  <nz-header>
+    <div class="logo">
+      <h1 class="title">SOPA DE LETRAS</h1>
+    </div>
+  </nz-header>
+
+  <div class="content">
+    <nz-content>
+      {{form.valid | json}}
+      <div class="inner-content margin-content">
+        <div class="flex-evenly">
+
+          <form [formGroup]="form">
+            <h3>Ingresa el tamaño de la matriz</h3>
+
+            <div class="flex-evenly">
+              <nz-form-item>
+                <nz-form-control [nzSpan]="12" nzValidateStatus="{{isFieldInValidF1('tamX')}}"
+                  nzErrorTip="Únicamente enteros positivos mayores que cero">
+                  <nz-input-number formControlName="tamX" placeholder="n"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              x
+              <nz-form-item>
+                <nz-form-control [nzSpan]="12" nzValidateStatus="{{isFieldInValidF1('tamY')}}"
+                  nzErrorTip="Únicamente enteros positivos mayores que cero">
+                  <nz-input-number formControlName="tamY" placeholder="m"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                <button nz-button nzType="primary" (click)="generarControls()">Dar tamaño</button>
+              </nz-form-control>
+            </div>
+          </form>
+
+          <form [formGroup]="formPalabra" (ngSubmit)="submitForm()">
+            <h3>Ingresa la palabra a buscar</h3>
+
+            <div class="flex-evenly lg">
+              <nz-form-item>
+                <nz-form-control [nzSpan]="12" nzValidateStatus="{{isFieldInValidF2('palabra')}}"
+                  nzErrorTip="Únicamente valores alfabéticos">
+                  <input nz-input formControlName="palabra" placeholder="Palabra" />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                <button nz-button nzType="primary" (click)="buscarPalabra()">Búsqueda</button>
+              </nz-form-control>
+            </div>
+          </form>
+        </div>
+
+        <form [formGroup]="formMatriz">
+
+          <div style="margin-top: 20px;">
+            <nz-card nzTitle="Por item, digita una sola letra alfabética">
+
+              <table>
+                <ng-container formArrayName="filas">
+
+                  <tr *ngFor="let item of filas.controls; let i = index" [formGroupName]="i">
+                    <ng-container>
+                      <!-- solo se pone formArrayName si tiene nombre el control -->
+                      <ng-container *ngFor="let subItem of columas(i).controls; let j = index" 
+                      [formGroupName]="j">
+                          <td><input nz-input [formControl]="celda(i, j)" placeholder="({{i}},{{j}})" pattern="/^[A-Z]+$/i"></td>
+                      </ng-container>
+                    </ng-container>
+                  </tr>
+
+                </ng-container>
+              </table>
+
+              <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
+              </nz-form-control>
+
+            </nz-card>
+          </div>
+        </form>
+      </div>
+    </nz-content>
+
+    <nz-footer>Sopa de letras ©2022 Diana Córdoba</nz-footer>
+
+  </div>
+
+
+</nz-layout>

@@ -1,0 +1,51 @@
+@import 'zorro-config/zorro-config';
+
+::ng-deep .ant-card-grid {
+    padding: 7px;
+}
+
+:host ::ng-deep .ant-form-item {
+    margin: 0px;
+}
+
+::ng-deep h1 {
+    margin: 0;
+    color: #fff;
+}
+
+:root [nz-form][_ngcontent-vkm-c109] {
+    max-width: 1000px;
+}
+
+.ant-input {
+    width: 60px;
+}
+
+.lg .ant-input {
+    width: 160px;
+}
+
+.content {
+    height: 100vh;
+
+    .title {
+        font-size: 0.5em !important;
+    }
+}
+
+.margin-content {
+    margin-top: 20px;
+    color: #fff !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-evenly{
+    display: flex;
+    justify-content: space-evenly
+}
+
+
+
